@@ -1,0 +1,13 @@
+*.out
+*.o
+*.swp
+*.a
+\#*\#
+*~
+
+include/my.h
+include/structs.h
+include/macros.h
+
+ai
+sim
