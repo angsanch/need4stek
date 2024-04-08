@@ -14,8 +14,8 @@ static void simulate_car(void)
     memset(&c, 0, sizeof(car));
     while (true) {
         run_command(GET_INFO_LIDAR, &c.lidar);
-        c.throttle = c.lidar.front;
-        c.dir = ((c.lidar.sides) * 0.025) + (c.dir * 0.95);
+        c.intended.throttle = c.lidar.front;
+        c.intended.dir = c.lidar.bias * (22.5 / c.lidar.front);
         set_direction(&c);
         set_throttle(&c);
     }

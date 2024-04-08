@@ -13,8 +13,9 @@
     #include <stdlib.h>
     #include <stdarg.h>
     #include <string.h>
+    #include <math.h>
 
-    #define ABS(n)  ((n > 0) ? n : -n)
+    #define ABS(n)  (((n) >= 0) ? (n) : -(n))
 
 enum commands_enum {
     START_SIMULATION,
@@ -33,15 +34,22 @@ enum commands_enum {
 
 typedef struct lidar_information {
     float indv[32];
+    float maxs[16];
+    float right;
+    float left;
+    float bias;
     float front;
-    float sides;
 } lidr;
+
+typedef struct control_information {
+    float throttle;
+    float dir;
+} car_con;
 
 typedef struct car_information {
     lidr lidar;
-    float speed;
-    float dir;
-    float throttle;
+    car_con current;
+    car_con intended;
 } car;
 
 char **free_string_array(char **result);

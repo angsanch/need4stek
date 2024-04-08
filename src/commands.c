@@ -72,7 +72,7 @@ static void parse_data(int type, va_list *l, char **line)
         case 2:
             lidar = va_arg(*l, lidr *);
             for (int i = 0; i < 32; i ++)
-                lidar->indv[i] = (atof(line[3 + i]) + 1) / 30.5;
+                lidar->indv[i] = atof(line[3 + i]);
             get_lidar(lidar);
             break;
         case 3:

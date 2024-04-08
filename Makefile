@@ -20,7 +20,7 @@ O_FILES = $(C_FILES:.c=.o)
 NAME=ai
 
 $(NAME): $(O_FILES)
-	$(CC) $(CFLAGS) -o $(NAME) $(O_FILES)
+	$(CC) $(CFLAGS) -o $(NAME) $(O_FILES) -lm
 
 all: $(NAME)
 

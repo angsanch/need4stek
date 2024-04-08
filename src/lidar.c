@@ -8,14 +8,14 @@
 #include "../include/stek.h"
 #include <math.h>
 
-static float average(int n, float *nums)
+/*static float average(int n, float *nums)
 {
     float sum = 0;
 
     for (int i = 0; i < n; i ++)
         sum += nums[i];
     return (sum / n);
-}
+}*/
 
 float map(float n, float ranges[2][2])
 {
@@ -29,15 +29,17 @@ float map(float n, float ranges[2][2])
 
 void get_lidar(lidr *l)
 {
-    float max = 0;
-    int index = 0;
+    int i;
 
-    l->front = average(32, l->indv);
-    for (int i = 0; i < 32; i ++)
-        if (max < l->indv[i]) {
-            max = l->indv[i];
-            index = i;
-        }
-    l->sides = map(index, (float[2][2]){{0, 31}, {-100, 100}});
-    dprintf(2, "%f %f\n", l->front, l->sides);
+    for (int n = 0; n < 32; n ++) {
+        i = (n >= 16) ? (31 - n) : n;
+        if (l->maxs[i] < l->indv[n])
+            l->maxs[i] = l->indv[n];
+        l->indv[n] = map(l->indv[n], (float[2][2]){{0, l->maxs[i]}, {0, 100}});
+    }
+    l->right = l->indv[31];
+    l->left = l->indv[0];
+    l->bias = l->right - l->left;
+    l->front = l->indv[(int)map(l->bias,
+        (float[2][2]){{-100, 100}, {0, 31.99}})];
 }

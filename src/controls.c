@@ -9,13 +9,20 @@
 
 void set_direction(car *c)
 {
-    run_command(WHEELS_DIR, (-c->dir / 100));
+    run_command(WHEELS_DIR, (-c->intended.dir / 100));
+    c->current.dir = c->intended.dir;
 }
 
 void set_throttle(car *c)
 {
-    if (c->throttle > 0)
-        run_command(CAR_FORWARD, (c->throttle / 100));
+    float real;
+
+    if (c->intended.throttle > 100)
+        real = 100;
+    else if (c->intended.throttle < -100)
+        real = -100;
     else
-        run_command(CAR_BACKWARDS, (-c->throttle / 100));
+        real = c->intended.throttle;
+    run_command((real >= 0) ? CAR_FORWARD : CAR_BACKWARDS, (real / 100));
+    c->current.throttle = c->intended.throttle;
 }
