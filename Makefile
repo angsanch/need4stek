@@ -10,6 +10,10 @@ CC=gcc
 CFLAGS=-Wall -Werror -Wextra
 
 C_FILES = src/main.c \
+			src/my_split.c \
+			src/commands.c \
+			src/lidar.c \
+			src/controls.c \
 
 O_FILES = $(C_FILES:.c=.o)
 

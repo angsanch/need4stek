@@ -5,21 +5,25 @@
 ** If i cant drive a real car...
 */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "../include/stek.h"
 
-void run_command(char const *str)
+static void simulate_car(void)
 {
-    char buff[1024];
+    car c;
 
-    dprintf(1, "%s\n", str);
-    read(0, buff, 1024);
+    memset(&c, 0, sizeof(car));
+    while (true) {
+        run_command(GET_INFO_LIDAR, &c.lidar);
+        c.throttle = c.lidar.front;
+        c.dir = ((c.lidar.sides) * 0.025) + (c.dir * 0.95);
+        set_direction(&c);
+        set_throttle(&c);
+    }
 }
 
 int main(void)
 {
-    run_command("start_simulation");
-    run_command("car_forward:0.5");
-    sleep(10);
-    run_command("stop_simulation");
+    run_command(START_SIMULATION);
+    simulate_car();
+    run_command(STOP_SIMULATION);
 }
