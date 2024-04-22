@@ -66,11 +66,11 @@ static int get_response_type(int command)
 static void parse_data(int type, va_list *l, char **line)
 {
     long *longs;
-    lidr *lidar;
+    lidr_t *lidar;
 
     switch (type) {
         case 2:
-            lidar = va_arg(*l, lidr *);
+            lidar = va_arg(*l, lidr_t *);
             for (int i = 0; i < 32; i ++)
                 lidar->indv[i] = atof(line[3 + i]);
             get_lidar(lidar);
@@ -80,7 +80,7 @@ static void parse_data(int type, va_list *l, char **line)
             break;
         case 4:
             longs = va_arg(*l, long *);
-            scanf("[%ld,%ld]", &longs[0], &longs[1]);
+            sscanf(line[3], "[%lds,%ldns]", &longs[0], &longs[1]);
             break;
     }
 }

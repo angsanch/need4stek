@@ -7,16 +7,23 @@
 
 #include "../include/stek.h"
 
-void set_direction(car *c)
-{
-    run_command(WHEELS_DIR, (-c->intended.dir / 100));
-    c->current.dir = c->intended.dir;
-}
-
-void set_throttle(car *c)
+void set_direction(car_t *c)
 {
     float real;
 
+    if (ABS(c->current.dir - c->intended.dir) < 5)
+        return;
+    real = (c->intended.dir * 0.75) + (c->current.dir * 0.25);
+    run_command(WHEELS_DIR, (-real / 100));
+    c->current.dir = real;
+}
+
+void set_throttle(car_t *c)
+{
+    float real;
+
+    if (ABS(c->current.throttle - c->intended.throttle) < 5)
+        return;
     if (c->intended.throttle > 100)
         real = 100;
     else if (c->intended.throttle < -100)

@@ -9,16 +9,11 @@
 
 static void simulate_car(void)
 {
-    car c;
+    car_t c;
 
-    memset(&c, 0, sizeof(car));
-    while (true) {
-        run_command(GET_INFO_LIDAR, &c.lidar);
-        c.intended.throttle = c.lidar.front;
-        c.intended.dir = c.lidar.bias * (22.5 / c.lidar.front);
-        set_direction(&c);
-        set_throttle(&c);
-    }
+    memset(&c, 0, sizeof(car_t));
+    while (true)
+        drive(&c);
 }
 
 int main(void)

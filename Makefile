@@ -14,6 +14,7 @@ C_FILES = src/main.c \
 			src/commands.c \
 			src/lidar.c \
 			src/controls.c \
+			src/drive.c \
 
 O_FILES = $(C_FILES:.c=.o)
 
