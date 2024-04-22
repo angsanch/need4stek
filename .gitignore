@@ -11,3 +11,7 @@ include/macros.h
 
 ai
 sim
+
+n4s
+n4s_buffer
+pipes.sh
