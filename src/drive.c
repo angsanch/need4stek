@@ -106,6 +106,10 @@ static void direction(car_t *c)
 void drive(car_t *c)
 {
     run_command(GET_INFO_LIDAR, &c->lidar);
+    if (c->lidar.front < 1) {
+        dprintf(2, "Stuck. Exiting ...\n");
+        run_command(STOP_SIMULATION);
+    }
     throttle(c);
     direction(c);
     set_direction(c);
