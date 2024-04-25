@@ -4,7 +4,6 @@
 ** File description:
 ** Control the lidar
 */
-
 #include "../include/stek.h"
 #include <math.h>
 #include <time.h>
