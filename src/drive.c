@@ -74,33 +74,39 @@
 static void throttle(car_t *c)
 {
     c->intended.throttle = 10;
-    if (c->lidar.front > 12.5)
-        c->intended.throttle = 20;
-    if (c->lidar.front > 20)
-        c->intended.throttle = 40;
-    if (c->lidar.front > 35)
-        c->intended.throttle = 50;
+    if (c->lidar.front > 7.5)
+        c->intended.throttle = 25;
+    if (c->lidar.front > 15)
+        c->intended.throttle = 35;
+    if (c->lidar.front > 25)
+        c->intended.throttle = 60;
+    if (c->lidar.front > 40)
+        c->intended.throttle = 85;
     if (c->lidar.front > 50)
-        c->intended.throttle = 80;
-    if (c->lidar.front > 65)
         c->intended.throttle = 100;
+    if ((c->lidar.left < 9 || c->lidar.right < 9)
+        && c->intended.throttle > 20)
+        c->intended.throttle = 21;
 }
 
 static void direction(car_t *c)
 {
-    c->intended.dir = 50;
-    if (c->lidar.front > 5)
+    c->intended.dir = 80;
+    if (c->lidar.front > 7.5)
         c->intended.dir = 30;
-    if (c->lidar.front > 10)
-        c->intended.dir = 20;
     if (c->lidar.front > 15)
+        c->intended.dir = 20;
+    if (c->lidar.front > 25)
         c->intended.dir = 10;
-    if (c->lidar.front > 30)
-        c->intended.dir = 5;
     if (c->lidar.front > 50)
+        c->intended.dir = 3;
+    if (c->lidar.front > 70)
         c->intended.dir = 0.5;
     if (c->lidar.bias < 0)
         c->intended.dir *= -1;
+    if ((c->lidar.left < 9 || c->lidar.right < 9)
+        && c->intended.throttle > 20)
+        c->intended.dir *= 1.5;
 }
 
 void drive(car_t *c)

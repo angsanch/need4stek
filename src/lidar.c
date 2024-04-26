@@ -38,5 +38,5 @@ void get_lidar(lidr_t *l)
         l->bias = l->right / l->left;
     else
         l->bias = - l->left / l->right;
-    l->front = average(4, &l->indv[14]);
+    l->front = average(8, &l->indv[12]);
 }

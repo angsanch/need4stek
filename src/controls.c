@@ -11,9 +11,9 @@ void set_direction(car_t *c)
 {
     float real;
 
-    if (ABS(c->current.dir - c->intended.dir) < 5)
+    if (ABS(c->current.dir - c->intended.dir) < 4)
         return;
-    real = (c->intended.dir * 0.75) + (c->current.dir * 0.25);
+    real = c->intended.dir * 0.75;
     run_command(WHEELS_DIR, (-real / 100));
     c->current.dir = real;
 }
