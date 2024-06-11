@@ -35,9 +35,11 @@ re: fclean all
 
 DOMAIN=https://downloads.coppeliarobotics.com
 install:
+	rm -rf sim
 	wget -O - $(DOMAIN)/V4_1_0/CoppeliaSim_Edu_V4_1_0_Ubuntu20_04.tar.xz \
 		| tar -Jxpf -
 	mv CoppeliaSim_Edu_V4_1_0_Ubuntu20_04 sim
+	cp -r scene sim/scenes/n4s
 
 
 .PHONY: all clean fclean re install
