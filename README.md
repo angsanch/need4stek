@@ -37,6 +37,7 @@ Create a selfdriving car that can complete obstacle courses. The only informatio
 
 ## Authors
 * **Daniel Sanchez** ([GitHub](https://github.com/angsanch) / [LinkedIn](https://www.linkedin.com/in/angeldanielsanchez/))
+* **Luca Alonso** ([GitHub](https://github.com/Lucaalonso1) / [LinkedIn](https://www.linkedin.com/in/luca-alonso-froeling-64a6a2306/))
 
 ## License
 This project is licensed under the GNU Public License version 3.0 - see the [LICENSE](LICENSE) file for details.
